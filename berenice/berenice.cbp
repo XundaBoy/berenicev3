@@ -35,7 +35,7 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="menu.c">
+		<Unit filename="produtos.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions />

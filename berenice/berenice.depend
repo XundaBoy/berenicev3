@@ -4,3 +4,17 @@
 
 1667262591 c:\code\berenice\headers.h
 
+1667264058 source:c:\projetos\berenice\menu.c
+	"headers.h"
+
+1667349178 c:\projetos\berenice\headers.h
+
+1667349393 source:c:\projetos\berenice\produtos.c
+	"headers.h"
+
+1667349422 source:c:\projetos\berenice\main.c
+	<stdio.h>
+	<stdlib.h>
+	"headers.h"
+	<locale.h>
+
