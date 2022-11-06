@@ -15,11 +15,13 @@ void menuDeProdutos(struct cadastro_produtos *ptrProdutos,
                     int *tamanhoVetorProdts,
                     int *contadorProdutos);
 
-void exibirDeProdutos(struct cadastro_produtos *ptrProdutos);
+void exibirDeProdutos(struct cadastro_produtos *ptrProdutos,
+                      int **tamanhoVetorProdts,
+                      int **contadorProdutos);
 
-void cadastrarProdutos(struct cadastro_produtos *ptrProdutos,
-                       int *tamanhoVetorProdts,
-                       int *contadorProdutos);
+void cadastrarProdutos(struct cadastro_produtos **ptrProdutos,
+                       int **tamanhoVetorProdts,
+                       int **contadorProdutos);
 
 // Funções de venda
 

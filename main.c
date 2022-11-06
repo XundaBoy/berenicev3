@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers.h"
 #include <locale.h>
+
+#include "headers.h"
+
 
 int main()
 {
@@ -15,7 +17,7 @@ int main()
         tamanhoVetorProdts = 0,
         contadorProdutos = 0;
 
-    Produtos **ptrProdutos = NULL;
+    Produtos *ptrProdutos = NULL;
 
     printf("\n\n=====\t\t||\t\t BEM-VINDO A PADARIA DA BERENICE \t\t||\t\t=====\n\n");
 
@@ -44,7 +46,7 @@ int main()
 
             case 2:
                 flag = 0;
-                menuDeVendas(ptrProdutos,
+                menuDeVendas(&ptrProdutos,
                              &tamanhoVetorProdts,
                              &contadorProdutos);
 
@@ -57,8 +59,8 @@ int main()
                 {
                     for(int i=0; i < contadorProdutos; i++)
                     {
-                        free(ptrProdutos[i]);
-                        ptrProdutos[i] = NULL;
+//                       free(ptrProdutos[i]);
+//                       ptrProdutos[i] = NULL;
                     }
                 }
 

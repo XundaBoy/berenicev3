@@ -11,11 +11,14 @@ void menuDeProdutos(struct cadastro_produtos *ptrProdutos,
     int flag = 1, codigo;
     int i = 0;
     char voltar = 'q';
-    *tamanhoVetorProdts = 10;
 
     while(flag == 1) {
             while(codigo != 7) {
                 system("cls");
+
+                if(ptrProdutos == NULL) {
+            printf("ERRO");
+        }
 
                 printf("\n\n=====\t\t||\t\t MENU DE PRODUTOS \t\t||\t\t=====\n\n");
 
@@ -32,26 +35,30 @@ void menuDeProdutos(struct cadastro_produtos *ptrProdutos,
                 scanf("%d", &codigo);
                 getchar();
 
-                ptrProdutos = calloc(10,sizeof(Produtos));
-
-                ptrProdutos[0].id = 10;
-                ptrProdutos[0].estoque = 100;
-                ptrProdutos[0].nome = 'c';
-                ptrProdutos[0].preco = 100;
-
                 switch(codigo)
                 {
                 case 1:
                     flag = 0;
                     system("cls");
-                    printf("%i", *tamanhoVetorProdts);
-                    exibirProdutos(ptrProdutos);
+
+                    if(*tamanhoVetorProdts > 0) {
+                        exibirProdutos(ptrProdutos,
+                                       &tamanhoVetorProdts);
+                    } else {
+                        printf("\n\aAVISO: Você não possui produtos cadastrados.\n");
+                        printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+                        scanf("%c", &voltar);
+                    }
 
                     break;
 
                 case 2:
                     flag = 0;
-                    cadastrarProdutos()
+                    system("cls");
+
+                    cadastrarProdutos(ptrProdutos,
+                                      &tamanhoVetorProdts,
+                                      &contadorProdutos);
 
                     break;
 
@@ -98,37 +105,60 @@ void menuDeProdutos(struct cadastro_produtos *ptrProdutos,
     }
 }
 
-void exibirProdutos(struct cadastro_produtos *ptrProdutos) {
+void exibirProdutos(struct cadastro_produtos *ptrProdutos,
+                     int **tamanhoVetorProdts) {
 
     char voltar;
 
     printf("\n\n=====\t\t||\t\t PRODUTOS \t\t||\t\t=====\n\n");
     printf("\n\t Código \t Produto \t Preço     \t Quantidade \t\n");
 
-    for(int i = 0; i<10;i++) {
+    for(int i = 0; i<**tamanhoVetorProdts;i++) {
 
     printf("\n\t %d     \t %c      \t R$ %.2f   \t %d         \t",
             ptrProdutos[i].id,
-            ptrProdutos[i].nome,
+            'c',
             ptrProdutos[i].preco,
             ptrProdutos[i].estoque);
     }
 
-    printf("\n\nVocê será redirecinado ao menu principal. Aperte qualquer tecla para continuar.");
+    printf("\n\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
     scanf("%c", &voltar);
 
 }
 
-void cadastrarProdutos(struct cadastro_produtos *ptrProdutos,
-                       int *tamanhoVetorProdts,
-                       int *contadorProdutos) {
+void cadastrarProdutos(struct cadastro_produtos **ptrProdutos,
+                       int **tamanhoVetorProdts,
+                       int **contadorProdutos) {
 
     int addProdutos = 0;
 
+    if(ptrProdutos == NULL) {
+            printf("ERRO");
+        }
+
+    printf("\n\n=====\t\t||\t\t CADASTRO DE PRODUTOS \t\t||\t\t=====\n\n");
     printf("\nDigite a quantidade de produtos que você quer cadastrar: ");
-    scanf("%i", addProdutos);
+    scanf("%i", &addProdutos);
     getchar();
 
-    printf("%i", addProdutos);
 
+    if(**tamanhoVetorProdts == 0)
+    {
+        **tamanhoVetorProdts = addProdutos;
+        ptrProdutos = (Produtos*) calloc(addProdutos,sizeof(Produtos*));
+    }
+
+    if(ptrProdutos == NULL) {
+            printf("\aERRO");
+        }
+
+//    ptrProdutos[0].id = 200;
+
+//    printf("%i", ptrProdutos[0].id);
+    scanf("%i", &addProdutos);
+
+    //ptrProdutos[0].estoque = 100;
+    //ptrProdutos[0].nome = 'c';
+    //ptrProdutos[0].preco = 100;
 }

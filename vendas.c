@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers.h"
 #include <locale.h>
+#include <string.h>
+
+#include "headers.h"
 
 void menuDeVendas(struct cadastro_produtos *ptrProdutos,
                     int *tamanhoVetorProdts,
