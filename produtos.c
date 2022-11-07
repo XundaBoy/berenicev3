@@ -16,10 +16,6 @@ void menuDeProdutos(struct cadastro_produtos *ptrProdutos,
             while(codigo != 7) {
                 system("cls");
 
-                if(ptrProdutos == NULL) {
-            printf("ERRO");
-        }
-
                 printf("\n\n=====\t\t||\t\t MENU DE PRODUTOS \t\t||\t\t=====\n\n");
 
                 printf("\n \t Código  \t Opção              \t\n");
@@ -55,6 +51,24 @@ void menuDeProdutos(struct cadastro_produtos *ptrProdutos,
                 case 2:
                     flag = 0;
                     system("cls");
+
+                    int addProdutos = 0;
+
+                    printf("\n\n=====\t\t||\t\t CADASTRO DE PRODUTOS \t\t||\t\t=====\n\n");
+                    printf("\nDigite a quantidade de produtos que você quer cadastrar: ");
+                    scanf("%i", &addProdutos);
+                    getchar();
+
+
+                    if(*tamanhoVetorProdts == 0)
+                    {
+                        *tamanhoVetorProdts = addProdutos;
+                        ptrProdutos = (Produtos*) calloc(addProdutos,sizeof(Produtos));
+                    }
+
+                    if(ptrProdutos == NULL) {
+                            printf("\aERRO");
+                        }
 
                     cadastrarProdutos(ptrProdutos,
                                       &tamanhoVetorProdts,
@@ -127,38 +141,9 @@ void exibirProdutos(struct cadastro_produtos *ptrProdutos,
 
 }
 
-void cadastrarProdutos(struct cadastro_produtos **ptrProdutos,
+void cadastrarProdutos(struct cadastro_produtos *ptrProdutos,
                        int **tamanhoVetorProdts,
                        int **contadorProdutos) {
 
-    int addProdutos = 0;
-
-    if(ptrProdutos == NULL) {
-            printf("ERRO");
-        }
-
-    printf("\n\n=====\t\t||\t\t CADASTRO DE PRODUTOS \t\t||\t\t=====\n\n");
-    printf("\nDigite a quantidade de produtos que você quer cadastrar: ");
-    scanf("%i", &addProdutos);
-    getchar();
-
-
-    if(**tamanhoVetorProdts == 0)
-    {
-        **tamanhoVetorProdts = addProdutos;
-        ptrProdutos = (Produtos*) calloc(addProdutos,sizeof(Produtos*));
-    }
-
-    if(ptrProdutos == NULL) {
-            printf("\aERRO");
-        }
-
-//    ptrProdutos[0].id = 200;
-
-//    printf("%i", ptrProdutos[0].id);
-    scanf("%i", &addProdutos);
-
-    //ptrProdutos[0].estoque = 100;
-    //ptrProdutos[0].nome = 'c';
-    //ptrProdutos[0].preco = 100;
+    ptrProdutos[0].id = &ptrProdutos[0];
 }

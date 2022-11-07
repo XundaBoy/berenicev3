@@ -19,7 +19,7 @@ void exibirDeProdutos(struct cadastro_produtos *ptrProdutos,
                       int **tamanhoVetorProdts,
                       int **contadorProdutos);
 
-void cadastrarProdutos(struct cadastro_produtos **ptrProdutos,
+void cadastrarProdutos(struct cadastro_produtos *ptrProdutos,
                        int **tamanhoVetorProdts,
                        int **contadorProdutos);
 
