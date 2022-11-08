@@ -70,10 +70,9 @@ void menuDeProdutos( cadastro_produtos *ptrProdutos,
                 if(*tamanhoVetorProdts == 0)
                 {
                     *tamanhoVetorProdts = addProdutos;
-                    *contadorProdutos = addProdutos;
                     ptrProdutos = (cadastro_produtos*) calloc(addProdutos,sizeof(cadastro_produtos));
                 }
-                else if((*contadorProdutos+addProdutos) > *tamanhoVetorProdts)
+                else
                 {
                     int novoTamVetor = *tamanhoVetorProdts + addProdutos;
 
@@ -172,7 +171,7 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 {
 
     int i = 0;
-    /*
+
     for(i = 0; i<**tamanhoVetorProdts; i++)
     {
         int estoque = -1;
@@ -215,5 +214,5 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
                 ptrProdutos[i].preco = preco;
             }
         }
-    }*/
+    }
 }
