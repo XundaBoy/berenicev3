@@ -5,7 +5,7 @@
 
 #include "headers.h"
 
-void menuDeVendas(struct cadastro_produtos *ptrProdutos,
+void menuDeVendas(cadastro_produtos *ptrProdutos,
                     int *tamanhoVetorProdts,
                     int *contadorProdutos) {
 

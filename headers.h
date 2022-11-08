@@ -1,31 +1,35 @@
 #ifndef HEADERS_H_INCLUDED
 #define HEADERS_H_INCLUDED
 
-typedef struct cadastro_produtos {
-    char nome;
-    int id;
+typedef struct{
+    char nome[25];
+    long int id;
     int estoque;
     float preco;
     int qtdVendida;
-} Produtos;
+}cadastro_produtos;
 
 // Funções de produtos
 
-void menuDeProdutos(struct cadastro_produtos *ptrProdutos,
+void menuDeProdutos(cadastro_produtos *ptrProdutos,
                     int *tamanhoVetorProdts,
                     int *contadorProdutos);
 
-void exibirDeProdutos(struct cadastro_produtos *ptrProdutos,
+void exibirDeProdutos(cadastro_produtos *ptrProdutos,
                       int **tamanhoVetorProdts,
                       int **contadorProdutos);
 
-void cadastrarProdutos(struct cadastro_produtos *ptrProdutos,
+void cadastrarProdutos(cadastro_produtos *ptrProdutos,
+                       int **tamanhoVetorProdts,
+                       int **contadorProdutos);
+
+void cadastrarProdutos(cadastro_produtos *ptrProdutos,
                        int **tamanhoVetorProdts,
                        int **contadorProdutos);
 
 // Funções de venda
 
-void menuDeVendas(struct cadastro_produtos *ptrProdutos,
+void menuDeVendas(cadastro_produtos *ptrProdutos,
                   int *tamanhoVetorProdts,
                   int *contadorProdutos);
 

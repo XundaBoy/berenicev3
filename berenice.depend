@@ -59,26 +59,27 @@
 	"headers.h"
 	<locale.h>
 
-1667606868 source:c:\programas c\berenicev3-main\main.c
+1667867580 source:c:\programas c\berenicev3-main\main.c
 	<stdio.h>
 	<stdlib.h>
-	"headers.h"
 	<locale.h>
+	"headers.h"
 
-1667608160 c:\programas c\berenicev3-main\headers.h
+1667868624 c:\programas c\berenicev3-main\headers.h
 
-1667607126 source:c:\programas c\berenicev3-main\produtos.c
+1667868667 source:c:\programas c\berenicev3-main\produtos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"headers.h"
 	<locale.h>
 
-1667607031 source:c:\programas c\berenicev3-main\vendas.c
+1667864877 source:c:\programas c\berenicev3-main\vendas.c
 	<stdio.h>
 	<stdlib.h>
-	"headers.h"
 	<locale.h>
+	<string.h>
+	"headers.h"
 
 1667778216 source:c:\codeblocks\berenicev3-main\main.c
 	<stdio.h>
