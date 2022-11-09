@@ -149,7 +149,7 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
 }
 
 void exibirProdutos(cadastro_produtos *ptrProdutos,
-                    int **tamanhoVetorProdts)
+                      int tamanhoVetorProdts)
 {
 
     char voltar;
@@ -157,7 +157,7 @@ void exibirProdutos(cadastro_produtos *ptrProdutos,
     printf("\n\n=====\t\t||\t\t PRODUTOS \t\t||\t\t=====\n\n");
     printf("\n\t Código \t Produto \t Preço     \t Quantidade \t\n");
 
-    for(int i = 0; i<**tamanhoVetorProdts; i++)
+    for(int i = 0; i<tamanhoVetorProdts; i++)
     {
 
         printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t",
@@ -184,19 +184,27 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 
         if(ptrProdutos[i].id == 0)
         {
-            while (procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
+
+            while (procuraProduto(ptrProdutos, tamanhoVetorProdts, id) == -1)
             {
                 printf("Digite o codigo do produto: ");
                 scanf("%li",&id);
+                getchar();
 
                 if(procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
                 {
                     printf("Codigo ja existente!\n");
+
+
+                }
+                else
+                {
+                    ptrProdutos[i].id = id;
                 }
             }
             // Insere o id novo na estrutura
-            ptrProdutos[i].id = id;
 
+            getchar();
             printf("\nDigite o nome do produto de até 25 caracteres (%i)%li: ", i+1, ptrProdutos[i].id);
             gets(ptrProdutos[i].nome);
 
@@ -229,6 +237,23 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
                 }
                 ptrProdutos[i].preco = preco;
             }
+        }
+    }
+}
+
+int procuraProduto(cadastro_produtos *ptrProdutos,
+                      int tamanhoVetorProdts, long int idDigitado) {
+
+    int i = 0;
+
+    for(i = 0; i<tamanhoVetorProdts; i++) {
+        if (ptrProdutos[i].id == idDigitado) {
+
+            return i;
+        }
+        else
+        {
+            return -1;
         }
     }
 }

@@ -25,7 +25,7 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 // se encontrar devolve a posicação no vetor, ou seja a variavel i
 // se não encontrar devolve uma posição invalida ( < 0)
 int procuraProduto(cadastro_produtos *ptrProdutos,
-                      int tamanhoVetorProdts, long int id);
+                      int tamanhoVetorProdts, long int idDigitado);
 
 // Funções de venda
 

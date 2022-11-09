@@ -103,3 +103,25 @@
 	"headers.h"
 	<locale.h>
 
+1667955458 source:c:\progamas c\berenicev3-main\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"headers.h"
+
+1668033728 c:\progamas c\berenicev3-main\headers.h
+
+1668034826 source:c:\progamas c\berenicev3-main\produtos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"headers.h"
+	<locale.h>
+
+1667955458 source:c:\progamas c\berenicev3-main\vendas.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"headers.h"
+
