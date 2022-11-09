@@ -175,6 +175,7 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
     printf("%i", tamanhoVetorProdts);
 
     int i;
+    int flag = 0;
 
     for(i = 0; i < tamanhoVetorProdts; i++)
     {
@@ -185,20 +186,20 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
         if(ptrProdutos[i].id == 0)
         {
 
-            while (procuraProduto(ptrProdutos, tamanhoVetorProdts, id) == -1)
+            while (flag == 0)
             {
                 printf("Digite o codigo do produto: ");
                 scanf("%li",&id);
-                getchar();
 
                 if(procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
                 {
+                    flag = 0;
                     printf("Codigo ja existente!\n");
-
 
                 }
                 else
                 {
+                    flag = 1;
                     ptrProdutos[i].id = id;
                 }
             }
@@ -245,17 +246,21 @@ int procuraProduto(cadastro_produtos *ptrProdutos,
                       int tamanhoVetorProdts, long int idDigitado) {
 
     int i = 0;
+    int retorno = 0;
 
     for(i = 0; i<tamanhoVetorProdts; i++) {
-        if (ptrProdutos[i].id == idDigitado) {
 
-            return i;
+        if (ptrProdutos[i].id == idDigitado) {
+            retorno = i;
+            break;
         }
         else
         {
-            return -1;
+            retorno = -1;
         }
     }
+
+    return retorno;
 }
 
 /*
