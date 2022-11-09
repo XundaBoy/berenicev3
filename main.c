@@ -46,9 +46,8 @@ int main()
 
             case 2:
                 flag = 0;
-                menuDeVendas(&ptrProdutos,
-                             &tamanhoVetorProdts,
-                             &contadorProdutos);
+                menuDeVendas(ptrProdutos,
+                             tamanhoVetorProdts);
 
                 break;
 

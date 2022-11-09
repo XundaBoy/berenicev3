@@ -4,9 +4,8 @@
 #include "headers.h"
 #include <locale.h>
 
-void menuDeProdutos( cadastro_produtos *ptrProdutos,
-                     int *tamanhoVetorProdts,
-                     int *contadorProdutos)
+void menuDeProdutos( cadastro_produtos **ptrProdutos,
+                     int *tamanhoVetorProdts, int * contadorProdutos)
 {
 
     int flag = 1, codigo;
@@ -20,7 +19,7 @@ void menuDeProdutos( cadastro_produtos *ptrProdutos,
             system("cls");
 
             printf("\n\n=====\t\t||\t\t MENU DE PRODUTOS \t\t||\t\t=====\n\n");
-
+            printf("%i", *tamanhoVetorProdts);
             printf("\n \t Código  \t Opção              \t\n");
             printf("\n \t 1       \t Exibir             \t");
             printf("\n \t 2       \t Cadastrar          \t");
@@ -42,8 +41,8 @@ void menuDeProdutos( cadastro_produtos *ptrProdutos,
 
                 if(*tamanhoVetorProdts > 0)
                 {
-                    exibirProdutos(ptrProdutos,
-                                   &tamanhoVetorProdts);
+                    exibirProdutos(*ptrProdutos,
+                                   *tamanhoVetorProdts);
                 }
                 else
                 {
@@ -70,35 +69,39 @@ void menuDeProdutos( cadastro_produtos *ptrProdutos,
                 if(*tamanhoVetorProdts == 0)
                 {
                     *tamanhoVetorProdts = addProdutos;
-                    ptrProdutos = (cadastro_produtos*) calloc(addProdutos,sizeof(cadastro_produtos));
+                    *ptrProdutos = (cadastro_produtos*) calloc(addProdutos,sizeof(cadastro_produtos));
                 }
-                else
+                else if((*contadorProdutos)+addProdutos > *tamanhoVetorProdts)
                 {
-                    int novoTamVetor = *tamanhoVetorProdts + addProdutos;
+                    int novoTamVetor = *contadorProdutos + addProdutos;
 
                     // Aloca a nova área de memória para os produtos
-                    cadastro_produtos *aux = (cadastro_produtos*) calloc(novoTamVetor, sizeof(cadastro_produtos));
+                    cadastro_produtos *aux = (cadastro_produtos*) realloc(*ptrProdutos, novoTamVetor*sizeof(cadastro_produtos));
 
-                    // Copia o vetor velho para o novo;
-                    memcpy(aux, ptrProdutos, sizeof(tamanhoVetorProdts));
+                    if(aux == NULL) {
+                        printf("Falha ao alocar mem!");
+                        exit(1);
+                    }
 
-                    // Libera o vetor anterior de produtos
-                    free(ptrProdutos);
+                    memset(aux+*tamanhoVetorProdts, 0, (novoTamVetor-(*tamanhoVetorProdts))*sizeof(cadastro_produtos));
 
                     // Atualiza os ponteiros para a nova área
-                    ptrProdutos = aux;
+                    *ptrProdutos = aux;
+
                     *tamanhoVetorProdts = novoTamVetor;
                 }
 
-                if(ptrProdutos == NULL)
+                if(*ptrProdutos == NULL)
                 {
                     printf("\aERRO");
-                    return 1;
+                    exit(1);
                 }
 
-                cadastrarProdutos(ptrProdutos,
-                                  &tamanhoVetorProdts,
-                                  &contadorProdutos);
+                for(i=0; i < addProdutos; i++) {
+                    cadastrarProdutos(*ptrProdutos,
+                                  *tamanhoVetorProdts);
+                }
+                *contadorProdutos += addProdutos;
 
                 break;
 
@@ -166,27 +169,40 @@ void exibirProdutos(cadastro_produtos *ptrProdutos,
 }
 
 void cadastrarProdutos(cadastro_produtos *ptrProdutos,
-                       int **tamanhoVetorProdts,
-                       int **contadorProdutos)
+                       int tamanhoVetorProdts)
 {
 
-    int i = 0;
+    printf("%i", tamanhoVetorProdts);
 
-    for(i = 0; i<**tamanhoVetorProdts; i++)
+    int i;
+
+    for(i = 0; i < tamanhoVetorProdts; i++)
     {
         int estoque = -1;
         float preco = -1;
+        long int id = -1;
 
-        if(ptrProdutos[i].id == NULL)
+        if(ptrProdutos[i].id == 0)
         {
-            ptrProdutos[i].id = &ptrProdutos[i];
+            while (procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
+            {
+                printf("Digite o codigo do produto: ");
+                scanf("%li",&id);
 
-            printf("\nDigite o nome do produto de até 25 caracteres (%i)%i: ", i+1, ptrProdutos[i].id);
+                if(procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
+                {
+                    printf("Codigo ja existente!\n");
+                }
+            }
+            // Insere o id novo na estrutura
+            ptrProdutos[i].id = id;
+
+            printf("\nDigite o nome do produto de até 25 caracteres (%i)%li: ", i+1, ptrProdutos[i].id);
             gets(ptrProdutos[i].nome);
 
             while(estoque < 0)
             {
-                printf("\nDigite o estoque do produto (%i)%i: ", i+1, ptrProdutos[i].id);
+                printf("\nDigite o estoque do produto (%i)%li: ", i+1, ptrProdutos[i].id);
                 scanf("%i", &estoque);
                 getchar();
 
@@ -201,7 +217,7 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 
             while(preco < 0)
             {
-                printf("\nDigite o preço do produto (%i)%i: ", i+1,ptrProdutos[i].id);
+                printf("\nDigite o preço do produto (%i)%li: ", i+1,ptrProdutos[i].id);
                 scanf("%f", &preco);
                 getchar();
 
@@ -216,3 +232,10 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
         }
     }
 }
+
+/*
+Codigo do excluir
+            int i;
+            ptrProdutos[i].id = 0;
+            (*contagemProdutos)--;
+            */

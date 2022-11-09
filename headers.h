@@ -11,26 +11,25 @@ typedef struct{
 
 // Funções de produtos
 
-void menuDeProdutos(cadastro_produtos *ptrProdutos,
+void menuDeProdutos(cadastro_produtos **ptrProdutos,
                     int *tamanhoVetorProdts,
                     int *contadorProdutos);
 
 void exibirDeProdutos(cadastro_produtos *ptrProdutos,
-                      int **tamanhoVetorProdts,
-                      int **contadorProdutos);
+                      int tamanhoVetorProdts);
 
 void cadastrarProdutos(cadastro_produtos *ptrProdutos,
-                       int **tamanhoVetorProdts,
-                       int **contadorProdutos);
+                       int tamanhoVetorProdts);
 
-void cadastrarProdutos(cadastro_produtos *ptrProdutos,
-                       int **tamanhoVetorProdts,
-                       int **contadorProdutos);
+// Procura um produto com codigo id no vetor de produtos,
+// se encontrar devolve a posicação no vetor, ou seja a variavel i
+// se não encontrar devolve uma posição invalida ( < 0)
+int procuraProduto(cadastro_produtos *ptrProdutos,
+                      int tamanhoVetorProdts, long int id);
 
 // Funções de venda
 
 void menuDeVendas(cadastro_produtos *ptrProdutos,
-                  int *tamanhoVetorProdts,
-                  int *contadorProdutos);
+                  int tamanhoVetorProdts);
 
 #endif // HEADERS_H_INCLUDED

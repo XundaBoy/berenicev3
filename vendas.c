@@ -6,8 +6,7 @@
 #include "headers.h"
 
 void menuDeVendas(cadastro_produtos *ptrProdutos,
-                    int *tamanhoVetorProdts,
-                    int *contadorProdutos) {
+                    int tamanhoVetorProdts) {
 
     int flag = 1, codigo;
     char voltar = 'q';
