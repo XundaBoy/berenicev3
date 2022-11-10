@@ -21,6 +21,9 @@ void exibirDeProdutos(cadastro_produtos *ptrProdutos,
 void cadastrarProdutos(cadastro_produtos *ptrProdutos,
                        int tamanhoVetorProdts);
 
+void atualizarProduto(cadastro_produtos *ptrProdutos,
+                      int tamanhoVetorProdts);
+
 // Procura um produto com codigo id no vetor de produtos,
 // se encontrar devolve a posicação no vetor, ou seja a variavel i
 // se não encontrar devolve uma posição invalida ( < 0)

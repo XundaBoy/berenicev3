@@ -78,7 +78,8 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
                     // Aloca a nova área de memória para os produtos
                     cadastro_produtos *aux = (cadastro_produtos*) realloc(*ptrProdutos, novoTamVetor*sizeof(cadastro_produtos));
 
-                    if(aux == NULL) {
+                    if(aux == NULL)
+                    {
                         printf("Falha ao alocar mem!");
                         exit(1);
                     }
@@ -97,9 +98,10 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
                     exit(1);
                 }
 
-                for(i=0; i < addProdutos; i++) {
+                for(i=0; i < addProdutos; i++)
+                {
                     cadastrarProdutos(*ptrProdutos,
-                                  *tamanhoVetorProdts);
+                                      *tamanhoVetorProdts);
                 }
                 *contadorProdutos += addProdutos;
 
@@ -149,22 +151,23 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
 }
 
 void exibirProdutos(cadastro_produtos *ptrProdutos,
-                      int tamanhoVetorProdts)
+                    int tamanhoVetorProdts)
 {
 
     char voltar;
 
     printf("\n\n=====\t\t||\t\t PRODUTOS \t\t||\t\t=====\n\n");
-    printf("\n\t Código \t Produto \t Preço     \t Quantidade \t\n");
+    printf("\n\t ID     \t Produto \t Preço     \t Quantidade \t\n");
 
     for(int i = 0; i<tamanhoVetorProdts; i++)
     {
-        if(ptrProdutos[i]. id > 0) {
-           printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t",
-               ptrProdutos[i].id,
-               ptrProdutos[i].nome,
-               ptrProdutos[i].preco,
-               ptrProdutos[i].estoque);
+        if(ptrProdutos[i]. id > 0)
+        {
+            printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t",
+                   ptrProdutos[i].id,
+                   ptrProdutos[i].nome,
+                   ptrProdutos[i].preco,
+                   ptrProdutos[i].estoque);
         }
     }
 }
@@ -191,7 +194,8 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
                 printf("\nDigite o código do produto sendo este maior que 0: ");
                 scanf("%li",&id);
 
-                if(id < 1) {
+                if(id < 1)
+                {
                     printf("\nCódigo inválido");
                 }
 
@@ -246,15 +250,24 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
     }
 }
 
+void atualizarProduto(cadastro_produtos *ptrProdutos,
+                      int tamanhoVetorProdts)
+{
+    int idDigitado
+}
+
 int procuraProduto(cadastro_produtos *ptrProdutos,
-                      int tamanhoVetorProdts, long int idDigitado) {
+                   int tamanhoVetorProdts, long int idDigitado)
+{
 
     int i = 0;
     int retorno = 0;
 
-    for(i = 0; i<tamanhoVetorProdts; i++) {
+    for(i = 0; i<tamanhoVetorProdts; i++)
+    {
 
-        if (ptrProdutos[i].id == idDigitado) {
+        if (ptrProdutos[i].id == idDigitado)
+        {
             retorno = i;
             break;
         }
