@@ -19,7 +19,7 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
             system("cls");
 
             printf("\n\n=====\t\t||\t\t MENU DE PRODUTOS \t\t||\t\t=====\n\n");
-            printf("%i", *tamanhoVetorProdts);
+
             printf("\n \t Código  \t Opção              \t\n");
             printf("\n \t 1       \t Exibir             \t");
             printf("\n \t 2       \t Cadastrar          \t");
@@ -159,20 +159,19 @@ void exibirProdutos(cadastro_produtos *ptrProdutos,
 
     for(int i = 0; i<tamanhoVetorProdts; i++)
     {
-
-        printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t",
+        if(ptrProdutos[i]. id > 0) {
+           printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t",
                ptrProdutos[i].id,
                ptrProdutos[i].nome,
                ptrProdutos[i].preco,
                ptrProdutos[i].estoque);
+        }
     }
 }
 
 void cadastrarProdutos(cadastro_produtos *ptrProdutos,
                        int tamanhoVetorProdts)
 {
-
-    printf("%i", tamanhoVetorProdts);
 
     int i;
     int flag = 0;
@@ -182,19 +181,24 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
         int estoque = -1;
         float preco = -1;
         long int id = -1;
+        flag = 0;
 
         if(ptrProdutos[i].id == 0)
         {
 
             while (flag == 0)
             {
-                printf("Digite o codigo do produto: ");
+                printf("\nDigite o código do produto sendo este maior que 0: ");
                 scanf("%li",&id);
+
+                if(id < 1) {
+                    printf("\nCódigo inválido");
+                }
 
                 if(procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
                 {
                     flag = 0;
-                    printf("Codigo ja existente!\n");
+                    printf("\nCódigo ja existente!\n");
 
                 }
                 else
@@ -206,12 +210,12 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
             // Insere o id novo na estrutura
 
             getchar();
-            printf("\nDigite o nome do produto de até 25 caracteres (%i)%li: ", i+1, ptrProdutos[i].id);
-            gets(ptrProdutos[i].nome);
+            printf("\nDigite o nome do produto de ID com até 25 caracteres: ", ptrProdutos[i].id);
+            fgets(ptrProdutos[i].nome,25,stdin);
 
             while(estoque < 0)
             {
-                printf("\nDigite o estoque do produto (%i)%li: ", i+1, ptrProdutos[i].id);
+                printf("\nDigite o estoque do produto de ID %li: ", ptrProdutos[i].id);
                 scanf("%i", &estoque);
                 getchar();
 
@@ -226,7 +230,7 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 
             while(preco < 0)
             {
-                printf("\nDigite o preço do produto (%i)%li: ", i+1,ptrProdutos[i].id);
+                printf("\nDigite o preço do produto de ID %li: ", ptrProdutos[i].id);
                 scanf("%f", &preco);
                 getchar();
 
