@@ -37,9 +37,10 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
             {
             case 1:
                 flag = 0;
+
                 system("cls");
 
-                if(*tamanhoVetorProdts > 0)
+                if(*contadorProdutos > 0)
                 {
                     exibirProdutos(*ptrProdutos,
                                    *tamanhoVetorProdts);
@@ -56,6 +57,7 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
 
             case 2:
                 flag = 0;
+
                 system("cls");
 
                 int addProdutos = 0;
@@ -66,7 +68,7 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
                 getchar();
 
 
-                if(*tamanhoVetorProdts == 0)
+                if(*contadorProdutos == 0)
                 {
                     *tamanhoVetorProdts = addProdutos;
                     *ptrProdutos = (cadastro_produtos*) calloc(addProdutos,sizeof(cadastro_produtos));
@@ -104,27 +106,57 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
                                       *tamanhoVetorProdts);
                 }
                 *contadorProdutos += addProdutos;
+                printf("%i", *contadorProdutos);
+                scanf("%c", &voltar);
+
+                printf("\n\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+                scanf("%c", &voltar);
 
                 break;
 
             case 3:
                 flag = 0;
 
-                exibirProdutos(*ptrProdutos,
-                               *tamanhoVetorProdts);
+                system("cls");
 
-                atualizarProduto(*ptrProdutos, tamanhoVetorProdts);
+                if(*contadorProdutos > 0)
+                {
+                    exibirProdutos(*ptrProdutos,
+                                   *tamanhoVetorProdts);
+
+                    atualizarProduto(*ptrProdutos, *tamanhoVetorProdts);
+                }
+                else
+                {
+                    printf("\n\aAVISO: Você não possui produtos cadastrados.\n");
+                }
+
+                printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+                scanf("%c", &voltar);
 
                 break;
 
             case 4:
                 flag = 0;
 
-                exibirProdutos(*ptrProdutos,
-                               *tamanhoVetorProdts);
+                system("cls");
 
-                excluirProduto(*ptrProdutos,
-                               *tamanhoVetorProdts);
+                if(*contadorProdutos > 0)
+                {
+                    exibirProdutos(*ptrProdutos,
+                                   *tamanhoVetorProdts);
+
+                    excluirProduto(*ptrProdutos,
+                                   *tamanhoVetorProdts);
+
+                    *contadorProdutos = *contadorProdutos - 1;
+                    printf("%i", *contadorProdutos);
+                    scanf("%c", &voltar);
+                }
+                else
+                {
+                    printf("\n\aAVISO: Você não possui produtos cadastrados.\n");
+                }
 
                 break;
 
@@ -202,7 +234,7 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 
             while (flag == 0)
             {
-                printf("\nDigite o código do produto sendo este maior que 0: ");
+                printf("\nDigite o ID do produto sendo este maior que 0: ");
                 scanf("%li",&id);
 
                 if(id < 1)
@@ -258,7 +290,6 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 void atualizarProduto(cadastro_produtos *ptrProdutos,
                       int tamanhoVetorProdts)
 {
-    system("cls");
     printf("\n\n=====\t\t||\t\t ATUALIZAÇÃO DE PRODUTOS \t\t||\t\t=====\n\n");
     long int idDigitado = 0;
 
@@ -284,7 +315,7 @@ void atualizarProduto(cadastro_produtos *ptrProdutos,
 
         flag = 1;
 
-        if(idDigitado <1 || indice == -1)
+        if(indice == -1)
         {
             flag = 0;
             printf("\nProduto não encontrado!");
@@ -292,8 +323,11 @@ void atualizarProduto(cadastro_produtos *ptrProdutos,
     }
     while(flag == 0);
 
+
     quantidadeAntiga = ptrProdutos[indice].estoque;
     valorAntigo = ptrProdutos[indice].preco;
+
+
 
     do
     {
@@ -339,8 +373,6 @@ void excluirProduto(cadastro_produtos *ptrProdutos,
                     int *tamanhoVetorProdts)
 {
 
-    system("cls");
-
     long int idDigitado = 0;
 
     int flag = 0,
@@ -362,7 +394,7 @@ void excluirProduto(cadastro_produtos *ptrProdutos,
 
         flag = 1;
 
-        if(idDigitado <1 || indice == -1)
+        if(indice == -1)
         {
             flag = 0;
             printf("\nProduto não encontrado!");
@@ -375,31 +407,33 @@ void excluirProduto(cadastro_produtos *ptrProdutos,
 
     while(flag == 1)
     {
-        printf("\nAperte 1 para confirmar e 2 para cancelar.");
-        scanf("%i", confirma);
+        printf("\n\nAperte 1 para confirmar e 2 para cancelar: ");
+        scanf("%i", &confirma);
         getchar();
 
         switch(confirma)
         {
         case 1:
-        flag = 0;
-        ptrProdutos[indice].id = 0;
-        tamanhoVetorProdts--;
+            flag = 0;
+            ptrProdutos[indice].id = 0;
+            printf("\nProduto excluido com sucesso. Você será redirecionado ao menu de produtos, aperte qualquer tecla para continuar");
+            scanf("%c", &voltar);
 
-        break;
+            break;
 
         case 2:
-        flag = 0;
-        printf("\nAção cancelada");
+            flag = 0;
+            printf("\nAção cancelada. Você será redirecionado ao menu de produtos, aperte qualquer tecla para continuar");
+            scanf("%c", &voltar);
 
-        break;
+            break;
 
         default:
-        flag = 1;
+            flag = 1;
 
-        printf("\nCódigo inválido!");
+            printf("\nCódigo inválido!");
 
-        break;
+            break;
         }
     }
 }
@@ -416,7 +450,15 @@ int procuraProduto(cadastro_produtos *ptrProdutos,
 
         if (ptrProdutos[i].id == idDigitado)
         {
-            retorno = i;
+            if(ptrProdutos[i]. id == 0)
+            {
+                retorno = -1;
+            }
+            else
+            {
+                retorno = i;
+            }
+
             break;
         }
         else

@@ -81,22 +81,22 @@
 	<string.h>
 	"headers.h"
 
-1667778216 source:c:\codeblocks\berenicev3-main\main.c
+1668214259 source:c:\codeblocks\berenicev3-main\main.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
 	"headers.h"
 
-1667778401 c:\codeblocks\berenicev3-main\headers.h
+1668214259 c:\codeblocks\berenicev3-main\headers.h
 
-1667769870 source:c:\codeblocks\berenicev3-main\vendas.c
+1668214259 source:c:\codeblocks\berenicev3-main\vendas.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
 	<string.h>
 	"headers.h"
 
-1667778472 source:c:\codeblocks\berenicev3-main\produtos.c
+1668280464 source:c:\codeblocks\berenicev3-main\produtos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
