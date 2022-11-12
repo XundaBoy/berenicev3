@@ -109,12 +109,22 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
 
             case 3:
                 flag = 0;
+
+                exibirProdutos(*ptrProdutos,
+                               *tamanhoVetorProdts);
+
                 atualizarProduto(*ptrProdutos, tamanhoVetorProdts);
 
                 break;
 
             case 4:
                 flag = 0;
+
+                exibirProdutos(*ptrProdutos,
+                               *tamanhoVetorProdts);
+
+                excluirProduto(*ptrProdutos,
+                               *tamanhoVetorProdts);
 
                 break;
 
@@ -323,6 +333,75 @@ void atualizarProduto(cadastro_produtos *ptrProdutos,
 
     printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
     scanf("%c", &voltar);
+}
+
+void excluirProduto(cadastro_produtos *ptrProdutos,
+                    int *tamanhoVetorProdts)
+{
+
+    system("cls");
+
+    long int idDigitado = 0;
+
+    int flag = 0,
+        indice,
+        confirma;
+
+    char voltar;
+
+
+    printf("\n\n=====\t\t||\t\t EXCLUIR PRODUTOS \t\t||\t\t=====\n\n");
+
+    do
+    {
+        printf("\nDigite o ID do produto que você que excluir: ");
+        scanf("%li", &idDigitado);
+        getchar();
+
+        indice = procuraProduto(ptrProdutos, tamanhoVetorProdts, idDigitado);
+
+        flag = 1;
+
+        if(idDigitado <1 || indice == -1)
+        {
+            flag = 0;
+            printf("\nProduto não encontrado!");
+        }
+    }
+    while(flag == 0);
+
+    printf("\n\n=====\t\t||\t\t CONFIRMAR EXCLUSÃO \t\t||\t\t=====\n\n");
+    printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t", ptrProdutos[indice].id, ptrProdutos[indice].nome, ptrProdutos[indice].preco, ptrProdutos[indice].estoque);
+
+    while(flag == 1)
+    {
+        printf("\nAperte 1 para confirmar e 2 para cancelar.");
+        scanf("%i", confirma);
+        getchar();
+
+        switch(confirma)
+        {
+        case 1:
+        flag = 0;
+        ptrProdutos[indice].id = 0;
+        tamanhoVetorProdts--;
+
+        break;
+
+        case 2:
+        flag = 0;
+        printf("\nAção cancelada");
+
+        break;
+
+        default:
+        flag = 1;
+
+        printf("\nCódigo inválido!");
+
+        break;
+        }
+    }
 }
 
 int procuraProduto(cadastro_produtos *ptrProdutos,
