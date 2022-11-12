@@ -30,7 +30,7 @@ void excluirProduto(cadastro_produtos *ptrProdutos,
 
 // Procura um produto com codigo id no vetor de produtos,
 // se encontrar devolve a posicação no vetor, ou seja a variavel i
-// se não encontrar devolve uma posição invalida ( < 0)
+// se não encontrar ou o ID = 0 devolve uma posição invalida (-1)
 int procuraProduto(cadastro_produtos *ptrProdutos,
                       int tamanhoVetorProdts, long int idDigitado);
 

@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "headers.h"
 #include <locale.h>
+
+#include "headers.h"
 
 void menuDeProdutos( cadastro_produtos **ptrProdutos,
                      int *tamanhoVetorProdts, int * contadorProdutos)
@@ -82,7 +83,7 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
 
                     if(aux == NULL)
                     {
-                        printf("Falha ao alocar mem!");
+                        printf("ERRO");
                         exit(1);
                     }
 
@@ -106,10 +107,8 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
                                       *tamanhoVetorProdts);
                 }
                 *contadorProdutos += addProdutos;
-                printf("%i", *contadorProdutos);
-                scanf("%c", &voltar);
 
-                printf("\n\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+                printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
                 scanf("%c", &voltar);
 
                 break;
@@ -158,15 +157,74 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
                     printf("\n\aAVISO: Você não possui produtos cadastrados.\n");
                 }
 
+                printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+                scanf("%c", &voltar);
+
                 break;
 
             case 5:
                 flag = 0;
 
+                if(*contadorProdutos > 0)
+                {
+                    i = 0;
+
+                    FILE *arquivo = fopen("produtos.bin","wb");
+                    if(arquivo == NULL)
+                    {
+                        printf("\nERRO NA ABERTURA DO ARQUIVO\n");
+                        exit(2);
+                    }
+
+                    fwrite(tamanhoVetorProdts, sizeof(int), 1, arquivo);
+                    fwrite(contadorProdutos, sizeof(int), 1, arquivo);
+                    fwrite(ptrProdutos, sizeof(cadastro_produtos), 1, arquivo);
+
+                    fclose(arquivo);
+
+                    printf("\nArquivo salvo com sucesso!");
+                }
+                else
+                {
+                    printf("\n\aAVISO: Você não possui produtos cadastrados.\n");
+                }
+
+                printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+                scanf("%c", &voltar);
+
                 break;
 
             case 6:
                 flag = 0;
+
+                i = 0;
+
+                FILE *arquivo = fopen("produtos.bin","rb");
+
+                if(arquivo == NULL)
+                {
+                    printf("ERRO NA ABERTURA DO ARQUIVO");
+                    exit(2);
+                }
+
+                printf("%i\n", ptrProdutos);
+                printf("%i\n", *ptrProdutos);
+
+
+                fread(tamanhoVetorProdts, sizeof(int), 1, arquivo);
+                fread(ptrProdutos, sizeof(cadastro_produtos), 1, arquivo);
+                fread(contadorProdutos, sizeof(int), 1, arquivo);
+
+
+                printf("%i\n", ptrProdutos);
+                printf("%i\n", *ptrProdutos);
+
+
+                fclose(arquivo);
+
+                printf("\nArquivo lido com sucesso!");
+                printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+                scanf("%c", &voltar);
 
                 break;
 
