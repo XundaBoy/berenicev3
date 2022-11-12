@@ -125,3 +125,25 @@
 	<string.h>
 	"headers.h"
 
+1668041031 source:c:\projetos\berenicev3-main\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"headers.h"
+
+1668211893 c:\projetos\berenicev3-main\headers.h
+
+1668211308 source:c:\projetos\berenicev3-main\produtos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"headers.h"
+	<locale.h>
+
+1668041031 source:c:\projetos\berenicev3-main\vendas.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"headers.h"
+

@@ -7,6 +7,7 @@ typedef struct{
     int estoque;
     float preco;
     int qtdVendida;
+
 }cadastro_produtos;
 
 // Funções de produtos
@@ -15,7 +16,7 @@ void menuDeProdutos(cadastro_produtos **ptrProdutos,
                     int *tamanhoVetorProdts,
                     int *contadorProdutos);
 
-void exibirDeProdutos(cadastro_produtos *ptrProdutos,
+void exibirProdutos(cadastro_produtos *ptrProdutos,
                       int tamanhoVetorProdts);
 
 void cadastrarProdutos(cadastro_produtos *ptrProdutos,

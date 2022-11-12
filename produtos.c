@@ -109,6 +109,7 @@ void menuDeProdutos( cadastro_produtos **ptrProdutos,
 
             case 3:
                 flag = 0;
+                atualizarProduto(*ptrProdutos, tamanhoVetorProdts);
 
                 break;
 
@@ -181,7 +182,7 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 
     for(i = 0; i < tamanhoVetorProdts; i++)
     {
-        int estoque = -1;
+        int ptr = -1;
         float preco = -1;
         long int id = -1;
         flag = 0;
@@ -196,14 +197,13 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 
                 if(id < 1)
                 {
+                    flag = 0;
                     printf("\nCódigo inválido");
                 }
-
-                if(procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
+                else if(procuraProduto(ptrProdutos, tamanhoVetorProdts, id) != -1)
                 {
                     flag = 0;
                     printf("\nCódigo ja existente!\n");
-
                 }
                 else
                 {
@@ -211,41 +211,36 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
                     ptrProdutos[i].id = id;
                 }
             }
-            // Insere o id novo na estrutura
 
             getchar();
             printf("\nDigite o nome do produto de ID com até 25 caracteres: ", ptrProdutos[i].id);
-            fgets(ptrProdutos[i].nome,25,stdin);
+            gets(ptrProdutos[i].nome);
 
-            while(estoque < 0)
+            do
             {
-                printf("\nDigite o estoque do produto de ID %li: ", ptrProdutos[i].id);
-                scanf("%i", &estoque);
+                printf("\nDigite o estoque do produto de ID %li sendo este valor maior ou igual a 0: ", ptrProdutos[i].id);
+                scanf("%i", &ptrProdutos[i].estoque);
                 getchar();
 
-                if(estoque < 0)
+                if(ptrProdutos[i].estoque < 0)
                 {
-                    printf("Quantidade inválida, digite um número maior que 0: ");
-                    scanf("%i", &estoque);
-                    getchar();
+                    printf("Quantidade inválida!");
                 }
-                ptrProdutos[i].estoque = estoque;
             }
+            while(ptrProdutos[i].estoque < 0);
 
-            while(preco < 0)
+            do
             {
-                printf("\nDigite o preço do produto de ID %li: ", ptrProdutos[i].id);
-                scanf("%f", &preco);
+                printf("\nDigite o preço do produto de ID %li sendo este valor maior ou igual a 0: ", ptrProdutos[i].id);
+                scanf("%f", &ptrProdutos[i].preco);
                 getchar();
 
-                if(preco < 0)
+                if(ptrProdutos[i].preco < 0)
                 {
-                    printf("Quantidade inválida, digite um número maior que 0: ");
-                    scanf("%f", &preco);
-                    getchar();
+                    printf("Quantidade inválida!");
                 }
-                ptrProdutos[i].preco = preco;
             }
+            while(ptrProdutos[i].preco < 0);
         }
     }
 }
@@ -253,7 +248,81 @@ void cadastrarProdutos(cadastro_produtos *ptrProdutos,
 void atualizarProduto(cadastro_produtos *ptrProdutos,
                       int tamanhoVetorProdts)
 {
-    int idDigitado
+    system("cls");
+    printf("\n\n=====\t\t||\t\t ATUALIZAÇÃO DE PRODUTOS \t\t||\t\t=====\n\n");
+    long int idDigitado = 0;
+
+    int flag = 0,
+        quantidadeAntiga,
+        quantidadeNova = -1,
+        indice;
+
+    float valorAntigo,
+          valorNovo = -1;
+
+    char voltar;
+
+
+
+    do
+    {
+        printf("\nDigite o ID do produto que você que alterar: ");
+        scanf("%li", &idDigitado);
+        getchar();
+
+        indice = procuraProduto(ptrProdutos, tamanhoVetorProdts, idDigitado);
+
+        flag = 1;
+
+        if(idDigitado <1 || indice == -1)
+        {
+            flag = 0;
+            printf("\nProduto não encontrado!");
+        }
+    }
+    while(flag == 0);
+
+    quantidadeAntiga = ptrProdutos[indice].estoque;
+    valorAntigo = ptrProdutos[indice].preco;
+
+    do
+    {
+        printf("\nDigite o novo estoque do produto de ID %li sendo este valor maior ou igual a 0: ", ptrProdutos[indice].id);
+        scanf("%i", &ptrProdutos[indice].estoque);
+        getchar();
+
+        if(ptrProdutos[indice].estoque < 0)
+        {
+            printf("Quantidade inválida!");
+        }
+    }
+    while(ptrProdutos[indice].estoque < 0);
+
+    do
+    {
+        printf("\nDigite o novo preço do produto de ID %li sendo este valor maior ou igual a 0: ", ptrProdutos[indice].id);
+        scanf("%f", &ptrProdutos[indice].preco);
+        getchar();
+
+        if(ptrProdutos[indice].preco < 0)
+        {
+            printf("Quantidade inválida!");
+        }
+    }
+    while(ptrProdutos[indice].preco < 0);
+
+    system("cls");
+
+    printf("\n\n=====\t\t||\t\t         ANTIGO          \t\t||\t\t=====\n\n");
+
+    printf("\n\t ID     \t Produto \t Preço     \t Quantidade \t\n");
+    printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t", ptrProdutos[indice].id, ptrProdutos[indice].nome, valorAntigo, quantidadeAntiga);
+
+    printf("\n\n=====\t\t||\t\t          NOVO           \t\t||\t\t=====\n\n");
+    printf("\n\t %d     \t %s      \t R$ %.2f   \t %d         \t", ptrProdutos[indice].id, ptrProdutos[indice].nome, ptrProdutos[indice].preco, ptrProdutos[indice].estoque);
+
+    printf("\nVocê será redirecinado ao menu de produtos. Aperte qualquer tecla para continuar.");
+    scanf("%c", &voltar);
 }
 
 int procuraProduto(cadastro_produtos *ptrProdutos,
